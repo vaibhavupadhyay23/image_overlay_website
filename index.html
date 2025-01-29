@@ -12,13 +12,27 @@
             background-color: #0f0f0f;
             color: #f2f2f2;
         }
-        h2 {
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            padding: 10px;
+        }
+        .header h2 {
             color: #FF671F;
+            margin: 0;
+            font-size: 24px;
+        }
+        h3 {
+            color: #FF671F;
+            margin-top: 10px;
+            text-align: left;
         }
         p {
             font-size: 16px;
             color: #f2f2f2;
             margin-bottom: 15px;
+            text-align: left;
         }
         input {
             margin: 10px;
@@ -52,6 +66,12 @@
         button:hover {
             background-color: #e65c1a;
         }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
         @media (max-width: 600px) {
             body {
                 margin: 10px;
@@ -63,17 +83,22 @@
     </style>
 </head>
 <body>
-    <h2>🖼️ Upload Two Square Images</h2>
-    <p>1️⃣ First, upload your primary image.</p>
-    <p>2️⃣ Then, upload the PNG image you want to overlay.</p>
-    <p>3️⃣ Once processed, click the download button to save your final image.</p>
-    
-    <input type="file" id="primaryImage" accept="image/*">
-    <input type="file" id="overlayImage" accept="image/*">
-    <br><br>
-    <canvas id="canvas"></canvas>
-    <br>
-    <button id="downloadBtn" style="display: none;">⬇️ Download Image</button>
+    <div class="header">
+        <h2>TECHEAGLE</h2>
+    </div>
+    <div class="container">
+        <h3>Upload two square images</h3>
+        <p>1️⃣ First, upload your primary image.</p>
+        <p>2️⃣ Then, upload the PNG image you want to overlay.</p>
+        <p>3️⃣ Once processed, click the download button to save your final image.</p>
+        
+        <input type="file" id="primaryImage" accept="image/*">
+        <input type="file" id="overlayImage" accept="image/*">
+        <br><br>
+        <canvas id="canvas"></canvas>
+        <br>
+        <button id="downloadBtn" style="display: none;">⬇️ Download Image</button>
+    </div>
     
     <script>
         const primaryInput = document.getElementById('primaryImage');
