@@ -9,41 +9,65 @@
             font-family: 'Poppins', sans-serif;
             text-align: center;
             margin: 20px;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #0f0f0f;
+            color: #f2f2f2;
         }
         h2 {
-            color: #4A90E2;
+            color: #FF671F;
+        }
+        p {
+            font-size: 16px;
+            color: #f2f2f2;
+            margin-bottom: 15px;
         }
         input {
             margin: 10px;
             padding: 10px;
-            border: 2px solid #4A90E2;
+            border: 2px solid #FF671F;
             border-radius: 8px;
-            background-color: white;
+            background-color: #f2f2f2;
+            color: #0f0f0f;
+            width: 90%;
+            max-width: 300px;
         }
         #canvas {
-            border: 3px solid #4A90E2;
+            border: 3px solid #FF671F;
             margin-top: 20px;
-            background-color: white;
+            background-color: #f2f2f2;
+            max-width: 100%;
+            height: auto;
         }
         button {
             margin-top: 20px;
             padding: 10px 20px;
             border: none;
             border-radius: 8px;
-            background-color: #4A90E2;
-            color: white;
+            background-color: #FF671F;
+            color: #f2f2f2;
             font-size: 16px;
             cursor: pointer;
+            width: 90%;
+            max-width: 300px;
         }
         button:hover {
-            background-color: #357ABD;
+            background-color: #e65c1a;
+        }
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            h2 {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
     <h2>🖼️ Upload Two Square Images</h2>
+    <p>1️⃣ First, upload your primary image.</p>
+    <p>2️⃣ Then, upload the PNG image you want to overlay.</p>
+    <p>3️⃣ Once processed, click the download button to save your final image.</p>
+    
     <input type="file" id="primaryImage" accept="image/*">
     <input type="file" id="overlayImage" accept="image/*">
     <br><br>
