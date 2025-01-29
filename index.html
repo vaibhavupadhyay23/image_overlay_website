@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Image Overlay Tool</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h2 {
+            color: #4A90E2;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #4A90E2;
+            border-radius: 8px;
+            background-color: white;
+        }
+        #canvas {
+            border: 3px solid #4A90E2;
+            margin-top: 20px;
+            background-color: white;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4A90E2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <h2>🖼️ Upload Two Square Images</h2>
+    <input type="file" id="primaryImage" accept="image/*">
+    <input type="file" id="overlayImage" accept="image/*">
+    <br><br>
+    <canvas id="canvas"></canvas>
+    <br>
+    <button id="downloadBtn" style="display: none;">⬇️ Download Image</button>
+    
+    <script>
+        const primaryInput = document.getElementById('primaryImage');
+        const overlayInput = document.getElementById('overlayImage');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const downloadBtn = document.getElementById('downloadBtn');
+        
+        let primaryImg = new Image();
+        let overlayImg = new Image();
+        
+        function loadImage(input, img) {
+            return new Promise((resolve) => {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        img.src = e.target.result;
+                    };
+                    img.onload = resolve;
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        async function processImages() {
+            await loadImage(primaryInput, primaryImg);
+            await loadImage(overlayInput, overlayImg);
+            
+            const size = Math.min(primaryImg.width, primaryImg.height);
+            canvas.width = size;
+            canvas.height = size;
+            
+            ctx.drawImage(primaryImg, 0, 0, size, size);
+            ctx.drawImage(overlayImg, 0, 0, size, size);
+            
+            downloadBtn.style.display = 'block';
+        }
+        
+        primaryInput.addEventListener('change', processImages);
+        overlayInput.addEventListener('change', processImages);
+        
+        downloadBtn.addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.download = 'overlayed-image.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    </script>
+</body>
+</html>
